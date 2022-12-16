@@ -2,7 +2,6 @@ import sweeperlib
 import random
 import time
 import datetime
-import matplotlib.pyplot as plt
 
 state = {
     "field": [],
