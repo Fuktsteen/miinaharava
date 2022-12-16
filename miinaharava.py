@@ -171,7 +171,7 @@ def floodfill(list, x, y):
                     ya = y + i
                     for j in range(-1, 2):
                         xa = x + j
-                        if xa >= 0 and ya >= 0 and state["shown"][ya][xa] == " " and abs(i) != abs(j) and list[ya][xa] != "x":
+                        if xa >= 0 and ya >= 0 and state["shown"][ya][xa] == " " and list[ya][xa] != "x":
                             if state["shown"][y][x] != "0":
                                 pass
                             else:
@@ -204,7 +204,11 @@ def aloitus():
         try:
             leveys = int(input("\nInput grid width: "))
             korkeus = int(input("Input grid height: "))
-            break
+            if leveys <= 0 or korkeus <= 0:
+                print("Check input.")
+                continue
+            else:
+                break
         except NameError:
             print("Check input.")
 
