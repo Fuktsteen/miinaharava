@@ -1,4 +1,4 @@
-Tämä huomio löytyy miinaharava.py riviltä 132:
+Tämä huomio löytyy miinaharava.py riviltä 142:
 
     #Sweeperlib default fontti ei toiminut, asensin sitten tämän "Hydrophilia Iced" fontin. Fonttitiedosto mukana miinaharava-kansiossa.
 
