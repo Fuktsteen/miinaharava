@@ -211,6 +211,8 @@ def aloitus():
                 break
         except NameError:
             print("Check input.")
+        except ValueError:
+            print("Integers please.")
 
     state["aika"][0] = time.time()
 
