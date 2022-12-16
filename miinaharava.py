@@ -204,8 +204,8 @@ def aloitus():
         try:
             leveys = int(input("\nInput grid width: "))
             korkeus = int(input("Input grid height: "))
-            if leveys <= 0 or korkeus <= 0:
-                print("Check input.")
+            if leveys < 2 or korkeus < 2:
+                print("Grid too small.")
                 continue
             else:
                 break
@@ -236,8 +236,12 @@ def aloitus():
     for i in field:
         for j in i:
             pommit += 1
-    place_mines(field, available, int(pommit/7))
-    state["pommit"] = int(pommit/7)
+    if pommit / 7 < 1:
+        pommit = 1
+    else:
+        pommit = int(pommit / 7)
+    place_mines(field, available, pommit)
+    state["pommit"] = pommit
 
     for iidx, i in enumerate(field):
         for jidx, j in enumerate(i):
