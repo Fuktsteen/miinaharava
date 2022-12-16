@@ -42,33 +42,36 @@ def handle_mouse(x, y, button, mods):
     This function is called when a mouse button is clicked inside the game window.
     Prints the position and clicked button of the mouse to the terminal.
     """
-    x = int(x / 40)
-    y = int(y / 40)
-    if button == 1:
-        if state["shown"][y][x] == "f":
-            pass
-        elif state["field"][y][x] == "x":
-            voittocheck(1)
-        elif state["field"][y][x] == "0":
-            state["shown"][y][x] = state["field"][y][x]
-            floodfill(state["field"], x, y)
-            voittocheck(0)
-        else:
-            state["shown"][y][x] = state["field"][y][x]
-            voittocheck(0)
-    elif button == 4:
-        if state["shown"][y][x] == " ":
-            if state["merkatut"] == state["pommit"]:
+    try:
+        x = int(x / 40)
+        y = int(y / 40)
+        if button == 1:
+            if state["shown"][y][x] == "f":
                 pass
-            else:
-                state["shown"][y][x] = "f"
-                state["merkatut"] += 1
+            elif state["field"][y][x] == "x":
+                voittocheck(1)
+            elif state["field"][y][x] == "0":
+                state["shown"][y][x] = state["field"][y][x]
+                floodfill(state["field"], x, y)
                 voittocheck(0)
-        elif state["shown"][y][x] == "f":
-            state["shown"][y][x] = " "
-            state["merkatut"] -= 1
-        else:
-            pass
+            else:
+                state["shown"][y][x] = state["field"][y][x]
+                voittocheck(0)
+        elif button == 4:
+            if state["shown"][y][x] == " ":
+                if state["merkatut"] == state["pommit"]:
+                    pass
+                else:
+                    state["shown"][y][x] = "f"
+                    state["merkatut"] += 1
+                    voittocheck(0)
+            elif state["shown"][y][x] == "f":
+                state["shown"][y][x] = " "
+                state["merkatut"] -= 1
+            else:
+                pass
+    except IndexError:
+        pass
 
 def voittocheck(w):
     muuttuja = 0
@@ -168,7 +171,7 @@ def floodfill(list, x, y):
                     ya = y + i
                     for j in range(-1, 2):
                         xa = x + j
-                        if xa >= 0 and ya >= 0 and abs(i) != abs(j) and state["shown"][ya][xa] == " " and list[ya][xa] != "x":
+                        if xa >= 0 and ya >= 0 and state["shown"][ya][xa] == " " and abs(i) != abs(j) and list[ya][xa] != "x":
                             if state["shown"][y][x] != "0":
                                 pass
                             else:
@@ -194,6 +197,9 @@ def main():
     sweeperlib.start()
 
 def aloitus():
+    state["kello"] = 0
+    state["pommit"] = 0
+    state["merkatut"] = 0
     while True:
         try:
             leveys = int(input("\nInput grid width: "))
